@@ -159,11 +159,16 @@ q8Text.forEach((t,i)=>{
   q8.insertAdjacentHTML("beforeend",`<div class="question">${i+1}. ${t}</div>`);
   if(i===2){
     makeRadios(q8,`q8_${i}`,["ไม่มี","มี"],[0,6]);
-    q8.insertAdjacentHTML("beforeend",`<div class="question" id="q8follow" style="display:none">ถ้าตอบว่าคิดเกี่ยวกับฆ่าตัวตาย: ท่านสามารถควบคุมความอยากฆ่าตัวตายที่ท่านคิดอยู่นั้นได้หรือไม่ หรือบอกได้ไหมว่าคงจะไม่ทำตามความคิดนั้นในขณะนี้</div>`);
-    makeRadios(q8,`q8_follow`,["ได้","ไม่ได้"],[0,8]);
-    document.querySelectorAll('input[name="q8_2"]').forEach(x=>x.addEventListener("change",()=>{
-      document.getElementById("q8follow").style.display=x.value==="6"?"block":"none";
-    }));
+    q8.insertAdjacentHTML("beforeend",`<div id="q8follow" style="display:none">
+  <div class="question">คำถามต่อเนื่อง: ท่านสามารถควบคุมความอยากฆ่าตัวตายที่ท่านคิดอยู่นั้นได้หรือไม่ หรือบอกได้ไหมว่าคงจะไม่ทำตามความคิดนั้นในขณะนี้</div>
+  <div id="q8followOptions"></div>
+</div>`);
+makeRadios(document.getElementById("q8followOptions"),`q8_follow`,["ได้","ไม่ได้"],[0,8]);
+document.querySelectorAll('input[name="q8_2"]').forEach(x=>x.addEventListener("change",()=>{
+  const follow=document.getElementById("q8follow");
+  follow.style.display=x.value==="6"?"block":"none";
+  if(x.value!=="6") document.querySelectorAll('input[name="q8_follow"]').forEach(r=>r.checked=false);
+}));
   }else{
     makeRadios(q8,`q8_${i}`,["ไม่มี","มี"],[0,q8Scores[i]]);
   }
