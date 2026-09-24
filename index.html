@@ -219,28 +219,142 @@ document.getElementById("p"+n).classList.add("active");
 window.scrollTo({top:0,behavior:"smooth"});
 }
 function finish(){
-if(!req("b_",22)){show("aburn","warn","กรุณาตอบแบบประเมิน Burnout ให้ครบทั้ง 22 ข้อ");return}
-let ee=0,dp=0,pa=0;
-for(let i=0;i<22;i++){
-const raw=+document.querySelector(`input[name="b_${i}"]:checked`).value;
-const num=i+1;
-const score=burnNeg.has(num)?raw:(6-raw);
-if([1,2,3,6,8,13,14,16,20].includes(num))ee+=score;
-if([5,10,11,15,22].includes(num))dp+=score;
-if([4,7,9,12,17,18,19,21].includes(num))pa+=score;
-}
-document.querySelectorAll(".step").forEach(x=>x.style.display="none");
-document.getElementById("app").style.display="block";
-document.getElementById("final").style.display="block";
-document.getElementById("aburn").style.display="none";
-document.getElementById("results").innerHTML=`
-<div class="result-card"><div>ความอ่อนล้าทางอารมณ์</div><div class="score">${ee} คะแนน</div><div class="small">${ee<=16?"ระดับต่ำ":ee<=26?"ระดับปานกลาง":"ระดับสูง"}</div></div>
-<div class="result-card"><div>การลดความเป็นบุคคล</div><div class="score">${dp} คะแนน</div><div class="small">${dp<=6?"ระดับต่ำ":dp<=12?"ระดับปานกลาง":"ระดับสูง"}</div></div>
-<div class="result-card"><div>ความสำเร็จส่วนบุคคล</div><div class="score">${pa} คะแนน</div><div class="small">${pa>=39?"ระดับสูง":pa>=32?"ระดับปานกลาง":"ระดับต่ำ"}</div></div>`;
-const q8=[];for(let i=0;i<8;i++)q8.push(+document.querySelector(`input[name="q8_${i}"]:checked`).value);
-const q8sum=q8.reduce((a,b)=>a+b,0)+(document.querySelector('input[name="q8_follow"]:checked')?+document.querySelector('input[name="q8_follow"]:checked').value:0);
-if(q8sum>=17){const u=document.getElementById("urgent");u.textContent="⚠️ คะแนน 8Q ≥ 17: ตามเอกสารที่ใช้ในระบบ ให้ส่งต่อโรงพยาบาลที่มีจิตแพทย์ด่วน";u.style.display="block";}
-window.scrollTo({top:0,behavior:"smooth"});
+  if(!req("b_",22)){
+    show("aburn","warn","กรุณาตอบแบบประเมิน Burnout ให้ครบทั้ง 22 ข้อ");
+    return;
+  }
+
+  /* ===== 2Q ===== */
+  const q2a=document.querySelector('input[name="q2_1"]:checked').value;
+  const q2b=document.querySelector('input[name="q2_2"]:checked').value;
+  const q2Has=(q2a==="yes" || q2b==="yes");
+
+  /* ===== 9Q ===== */
+  let q9sum=0;
+  for(let i=0;i<9;i++){
+    q9sum += +document.querySelector(`input[name="q9_${i}"]:checked`).value;
+  }
+
+  let q9level=
+    q9sum<=6 ? "ปกติ" :
+    q9sum<=12 ? "เล็กน้อย" :
+    q9sum<=18 ? "ปานกลาง" :
+    "รุนแรง";
+
+  /* ===== 8Q ===== */
+  let q8sum=0;
+  for(let i=0;i<8;i++){
+    q8sum += +document.querySelector(`input[name="q8_${i}"]:checked`).value;
+  }
+
+  const q8follow=document.querySelector('input[name="q8_follow"]:checked');
+  if(q8follow){
+    q8sum += +q8follow.value;
+  }
+
+  let q8level=
+    q8sum===0 ? "ไม่มีแนวโน้มฆ่าตัวตายในปัจจุบัน" :
+    q8sum<=8 ? "ระดับน้อย" :
+    q8sum<=16 ? "ระดับปานกลาง" :
+    "ระดับรุนแรง";
+
+  /* ===== ST-5 ===== */
+  let st5sum=0;
+  for(let i=0;i<5;i++){
+    st5sum += +document.querySelector(`input[name="st5_${i}"]:checked`).value;
+  }
+
+  let st5level=
+    st5sum<=4 ? "ปกติ" :
+    st5sum<=7 ? "ปานกลาง" :
+    "สูง";
+
+  /* ===== BURNOUT ===== */
+  let ee=0, dp=0, pa=0;
+
+  for(let i=0;i<22;i++){
+    const raw=+document.querySelector(`input[name="b_${i}"]:checked`).value;
+    const num=i+1;
+    const score=burnNeg.has(num) ? raw : (6-raw);
+
+    if([1,2,3,6,8,13,14,16,20].includes(num)) ee+=score;
+    if([5,10,11,15,22].includes(num)) dp+=score;
+    if([4,7,9,12,17,18,19,21].includes(num)) pa+=score;
+  }
+
+  const eeLevel=ee<=16 ? "ระดับต่ำ" : ee<=26 ? "ระดับปานกลาง" : "ระดับสูง";
+  const dpLevel=dp<=6 ? "ระดับต่ำ" : dp<=12 ? "ระดับปานกลาง" : "ระดับสูง";
+  const paLevel=pa>=39 ? "ระดับสูง" : pa>=32 ? "ระดับปานกลาง" : "ระดับต่ำ";
+
+  /* ===== แสดงหน้าสรุป ===== */
+  document.querySelectorAll(".step").forEach(x=>x.style.display="none");
+  document.getElementById("app").style.display="block";
+  document.getElementById("final").style.display="block";
+  document.getElementById("aburn").style.display="none";
+
+  document.getElementById("results").innerHTML=`
+
+  <div class="result-card">
+    <div>2Q • คัดกรองภาวะซึมเศร้าเบื้องต้น</div>
+    <div class="score">${q2Has ? "มีอาการอย่างน้อย 1 ข้อ" : "ไม่มีอาการ"}</div>
+    <div class="small">ผลการคัดกรอง ไม่ใช่การวินิจฉัย</div>
+  </div>
+
+  <div class="result-card">
+    <div>9Q • ภาวะซึมเศร้า</div>
+    <div class="score">${q9sum} คะแนน</div>
+    <div class="small">ระดับ ${q9level}</div>
+  </div>
+
+  <div class="result-card">
+    <div>8Q • ความเสี่ยงต่อการฆ่าตัวตาย</div>
+    <div class="score">${q8sum} คะแนน</div>
+    <div class="small">ระดับ ${q8level}</div>
+  </div>
+
+  <div class="result-card">
+    <div>ST-5 • ความเครียด</div>
+    <div class="score">${st5sum} คะแนน</div>
+    <div class="small">ระดับ ${st5level}</div>
+  </div>
+
+  <div class="result-card">
+    <div>Burnout • ความอ่อนล้าทางอารมณ์</div>
+    <div class="score">${ee} คะแนน</div>
+    <div class="small">${eeLevel}</div>
+  </div>
+
+  <div class="result-card">
+    <div>Burnout • การลดความเป็นบุคคล</div>
+    <div class="score">${dp} คะแนน</div>
+    <div class="small">${dpLevel}</div>
+  </div>
+
+  <div class="result-card">
+    <div>Burnout • ความสำเร็จส่วนบุคคล</div>
+    <div class="score">${pa} คะแนน</div>
+    <div class="small">${paLevel}</div>
+  </div>
+
+  <div class="result-card">
+    <div><strong>🌿 แนวทางดูแลใจ</strong></div>
+    <div class="small">
+      สังเกตอารมณ์ ความเครียด การนอน และพลังในการทำงานของตนเองอย่างสม่ำเสมอ
+      หากรู้สึกกังวลกับผลประเมิน ควรพูดคุยกับบุคลากรสุขภาพจิตหรือผู้รับผิดชอบของหน่วยงาน
+    </div>
+  </div>
+  `;
+
+  /* ===== แจ้งเตือน 8Q ===== */
+  if(q8sum>=17){
+    const u=document.getElementById("urgent");
+    u.textContent="⚠️ คะแนน 8Q ≥ 17: ตามแนวทางที่ใช้ในระบบ ให้ดำเนินการส่งต่อเพื่อรับการดูแลโดยเร็ว";
+    u.style.display="block";
+  }else{
+    document.getElementById("urgent").style.display="none";
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 </script>
 </body>
