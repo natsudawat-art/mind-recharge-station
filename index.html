@@ -3,206 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Mind Recharge Station</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, "Noto Sans Thai", sans-serif;
-  background: linear-gradient(180deg, #eef8ff, #fffdf7);
-  color: #17324d;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 25px 18px 40px;
-}
-
-.hero {
-  background: linear-gradient(135deg, #12658c, #174b73);
-  color: white;
-  padding: 35px 25px;
-  border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-}
-
-.badge {
-  display: inline-block;
-  background: rgba(255,255,255,0.18);
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-h1 {
-  font-size: 42px;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.subtitle {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 12px;
-}
-
-.description {
-  line-height: 1.6;
-  margin-top: 8px;
-}
-
-h2 {
-  margin-top: 30px;
-  color: #145b82;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  background: white;
-  border: 1px solid #dbe8f0;
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 6px 20px rgba(20,70,100,0.08);
-}
-
-.tag {
-  display: inline-block;
-  background: #eaf5fb;
-  color: #17618b;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.card h3 {
-  color: #145b82;
-  margin: 5px 0 8px;
-}
-
-.card p {
-  color: #5b6f7e;
-  line-height: 1.6;
-}
-
-.note {
-  margin-top: 22px;
-  padding: 16px;
-  background: #fff7df;
-  border-left: 5px solid #c49a32;
-  border-radius: 10px;
-  line-height: 1.6;
-}
-
-.footer {
-  text-align: center;
-  color: #71818d;
-  margin-top: 30px;
-  line-height: 1.6;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Thai",sans-serif;background:linear-gradient(180deg,#eef8ff,#fffdf7);color:#17324d}
+.container{max-width:920px;margin:auto;padding:18px 14px 45px}
+.hero{background:linear-gradient(135deg,#12658c,#174b73);color:#fff;padding:28px 20px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.badge{display:inline-block;background:rgba(255,255,255,.18);padding:7px 12px;border-radius:20px;font-size:13px;margin-bottom:12px}
+h1{font-size:clamp(32px,8vw,48px);line-height:1.1;margin:0}
+.subtitle{font-size:19px;font-weight:bold;margin-top:10px}.description{line-height:1.6;margin-top:8px}
+.panel{background:#fff;border:1px solid #dbe8f0;border-radius:20px;padding:20px;margin-top:18px;box-shadow:0 6px 20px rgba(20,70,100,.07)}
+h2{color:#145b82;margin-top:0}.small{color:#667985;line-height:1.6}
+.btn{width:100%;border:0;border-radius:13px;padding:14px 16px;background:#12658c;color:#fff;font-size:17px;font-weight:bold;margin-top:15px}
+.progress{display:flex;gap:5px;margin:18px 0}.dot{height:8px;flex:1;border-radius:9px;background:#d8e7ee}.dot.active{background:#12658c}
+.step-label{font-size:13px;color:#17618b;font-weight:bold}.question{font-size:17px;line-height:1.55;margin:16px 0 8px}
+.options{display:grid;gap:9px}.option{display:flex;align-items:flex-start;gap:9px;border:1px solid #dbe8f0;border-radius:12px;padding:11px;background:#fbfdff}.option input{margin-top:4px;accent-color:#12658c}
+.scale{overflow-x:auto}.scale table{width:100%;border-collapse:collapse;min-width:650px}.scale th,.scale td{border:1px solid #d8e5eb;padding:8px;vertical-align:top}.scale th{background:#edf6fa;color:#145b82}.scale td:first-child{width:48%}
+.alert{display:none;padding:15px;border-radius:12px;margin-top:14px;line-height:1.6}.warn{background:#fff7df;border-left:5px solid #c49a32}.danger{background:#ffe8e8;border-left:5px solid #c44747;color:#7a2020}.ok{background:#edf8ef;border-left:5px solid #4b9b60;color:#285c36}
+.result{display:none}.result-card{border-radius:16px;padding:16px;margin:10px 0;background:#f7fbfd;border:1px solid #dbe8f0}.score{font-size:25px;font-weight:bold;color:#145b82}
+.footer{text-align:center;color:#71818d;margin-top:28px;font-size:13px;line-height:1.6}
 </style>
 </head>
-
 <body>
-
 <div class="container">
+<section class="hero">
+<div class="badge">ฝ่ายการพยาบาล ศูนย์การแพทย์กาญจนาภิเษก</div>
+<h1>Mind Recharge Station</h1>
+<div class="subtitle">เช็กใจ • ดูแลใจ • เติมพลัง</div>
+<div class="description">ระบบประเมินสุขภาวะใจสำหรับบุคลากร โดยทุกคนทำแบบประเมินครบทั้ง 5 ส่วนตามลำดับ</div>
+</section>
 
-  <div class="hero">
+<section class="panel" id="intro">
+<h2>🌿 เริ่มต้นการประเมิน</h2>
+<p class="small">กรุณาตอบคำถามทุกข้อให้ครบ ระบบจะพาไปตามลำดับ <strong>2Q → 9Q → 8Q → ST-5 → Burnout</strong> และจะไม่ข้ามขั้น</p>
+<p class="small">การแสดงผลใช้เกณฑ์ตามเอกสารที่คุณให้มา และควรผ่านการตรวจสอบ/อนุมัติจากหน่วยงานก่อนนำไปใช้จริงทางคลินิก</p>
+<button class="btn" onclick="start()">เริ่มประเมิน →</button>
+</section>
 
-    <div class="badge">
-      ฝ่ายการพยาบาล ศูนย์การแพทย์กาญจนาภิเษก
-    </div>
+<section id="app" style="display:none">
+<div class="progress"><div class="dot active" id="p1"></div><div class="dot" id="p2"></div><div class="dot" id="p3"></div><div class="dot" id="p4"></div><div class="dot" id="p5"></div></div>
 
-    <h1>
-      Mind Recharge Station
-    </h1>
+<!-- 2Q -->
+<section class="panel step" id="s1">
+<div class="step-label">ขั้นที่ 1 / 5 • 2Q</div><h2>แบบคัดกรองโรคซึมเศร้า 2 คำถาม</h2>
+<p class="small">ใน 2 สัปดาห์ที่ผ่านมา รวมวันนี้</p>
+<div class="question">1. ท่านรู้สึกหดหู่ เศร้า หรือท้อแท้สิ้นหวัง หรือไม่</div>
+<div class="options">
+<label class="option"><input type="radio" name="q2_1" value="yes"> มี</label>
+<label class="option"><input type="radio" name="q2_1" value="no"> ไม่มี</label>
+</div>
+<div class="question">2. ท่านรู้สึกเบื่อ ทำอะไรก็ไม่เพลิดเพลิน หรือไม่</div>
+<div class="options">
+<label class="option"><input type="radio" name="q2_2" value="yes"> มี</label>
+<label class="option"><input type="radio" name="q2_2" value="no"> ไม่มี</label>
+</div>
+<div id="a2q" class="alert"></div>
+<button class="btn" onclick="next(1)">บันทึกและไป 9Q →</button>
+</section>
 
-    <div class="subtitle">
-      เช็กใจ • ดูแลใจ • เติมพลัง
-    </div>
+<!-- 9Q -->
+<section class="panel step" id="s2" style="display:none">
+<div class="step-label">ขั้นที่ 2 / 5 • 9Q</div><h2>แบบประเมินโรคซึมเศร้า 9 คำถาม</h2>
+<p class="small">ในช่วง 2 สัปดาห์ที่ผ่านมา รวมทั้งวันนี้ ท่านมีอาการเหล่านี้บ่อยแค่ไหน</p>
+<div id="q9"></div>
+<div id="a9q" class="alert"></div>
+<button class="btn" onclick="next(2)">บันทึกและไป 8Q →</button>
+</section>
 
-    <div class="description">
-      พื้นที่สำหรับบุคลากรในการสำรวจสุขภาวะใจ
-      และดูแลตัวเองอย่างสม่ำเสมอ
-    </div>
+<!-- 8Q -->
+<section class="panel step" id="s3" style="display:none">
+<div class="step-label">ขั้นที่ 3 / 5 • 8Q</div><h2>แบบประเมินการฆ่าตัวตาย 8 คำถาม</h2>
+<p class="small">กรุณาตอบตามช่วงเวลาที่ระบุในแต่ละข้อ</p>
+<div id="q8"></div>
+<div id="a8q" class="alert"></div>
+<button class="btn" onclick="next(3)">บันทึกและไป ST-5 →</button>
+</section>
 
-  </div>
+<!-- ST5 -->
+<section class="panel step" id="s4" style="display:none">
+<div class="step-label">ขั้นที่ 4 / 5 • ST-5</div><h2>แบบประเมินความเครียด ST-5</h2>
+<p class="small">ให้คะแนน 0–3 ตามความรู้สึกของท่าน</p>
+<div id="st5"></div>
+<div id="ast5" class="alert"></div>
+<button class="btn" onclick="next(4)">บันทึกและไป Burnout →</button>
+</section>
 
-  <h2>แบบประเมินสุขภาพใจ</h2>
+<!-- Burnout -->
+<section class="panel step" id="s5" style="display:none">
+<div class="step-label">ขั้นที่ 5 / 5 • Burnout</div><h2>แบบสอบถามภาวะหมดไฟในการทำงาน</h2>
+<p class="small">สำหรับเจ้าหน้าที่สาธารณสุข เลือกคำตอบที่ตรงกับความรู้สึกมากที่สุดเพียงคำตอบเดียว</p>
+<div id="burnout"></div>
+<div id="aburn" class="alert"></div>
+<button class="btn" onclick="finish()">เสร็จสิ้นการประเมิน →</button>
+</section>
 
-  <div class="grid">
+<section class="panel result" id="final">
+<h2>🎉 ประเมินครบทั้ง 5 ส่วนแล้ว</h2>
+<p class="small">สรุปผลตามเกณฑ์ในเอกสารที่ให้มา</p>
+<div id="results"></div>
+<div id="urgent" class="alert danger"></div>
+</section>
+</section>
 
-    <div class="card">
-      <div class="tag">2Q</div>
-      <h3>คัดกรองภาวะซึมเศร้าเบื้องต้น</h3>
-      <p>
-        แบบประเมินสั้น ๆ สำหรับสำรวจอารมณ์
-        และความรู้สึกในช่วงที่ผ่านมา
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="tag">9Q</div>
-      <h3>ประเมินภาวะซึมเศร้า</h3>
-      <p>
-        ใช้สำรวจระดับอาการที่เกี่ยวข้องกับ
-        ภาวะซึมเศร้า
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="tag">8Q</div>
-      <h3>ประเมินความเสี่ยงต่อการฆ่าตัวตาย</h3>
-      <p>
-        ช่วยคัดกรองและส่งต่อเมื่อพบ
-        สัญญาณความเสี่ยง
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="tag">ST-5</div>
-      <h3>ประเมินความเครียด</h3>
-      <p>
-        สำรวจระดับความเครียดและสัญญาณ
-        ที่ควรกลับมาดูแลตัวเอง
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="tag">Burnout</div>
-      <h3>ประเมินภาวะหมดไฟ</h3>
-      <p>
-        สำรวจความเหนื่อยล้าจากการทำงาน
-        และการดูแลใจของบุคลากร
-      </p>
-    </div>
-
-  </div>
-
-  <div class="note">
-    หากผลการประเมินทำให้รู้สึกกังวล หรือมีความคิดทำร้ายตนเอง
-    ควรแจ้งบุคลากรทางการแพทย์หรือขอความช่วยเหลือทันที
-  </div>
-
-  <div class="footer">
-    Mind Recharge Station<br>
-    ฝ่ายการพยาบาล ศูนย์การแพทย์กาญจนาภิเษก
-  </div>
-
+<div class="footer">Mind Recharge Station<br>ฝ่ายการพยาบาล ศูนย์การแพทย์กาญจนาภิเษก</div>
 </div>
 
+<script>
+const q9Text=[
+"เบื่อ ไม่สนใจอยากทำอะไร","ไม่สบายใจ ซึมเศร้า ท้อแท้","หลับยากหรือหลับๆตื่นๆหรือหลับมากไป",
+"เหนื่อยง่ายหรือไม่ค่อยมีแรง","เบื่ออาหารหรือกินมากเกินไป","รู้สึกไม่ดีกับตัวเอง คิดว่าตัวเองล้มเหลวหรือครอบครัวผิดหวัง",
+"สมาธิไม่ดี เวลาทำอะไร เช่น ดูโทรทัศน์ ฟังวิทยุ หรือทำงานที่ต้องใช้ความตั้งใจ",
+"พูดช้า ทำอะไรช้าลงจนคนอื่นสังเกตเห็นได้ หรือกระสับกระส่ายไม่สามารถอยู่นิ่งได้เหมือนที่เคยเป็น",
+"คิดทำร้ายตนเอง หรือคิดว่าถ้าตายไปคงจะดี"
+];
+const q9Opts=["ไม่มีเลย","เป็นบางวัน 1-7 วัน","เป็นบ่อย > 7 วัน","เป็นทุกวัน"];
+const q8Text=[
+"คิดอยากตาย หรือ คิดว่าตายไปจะดีกว่า",
+"อยากทำร้ายตัวเอง หรือ ทำให้ตัวเองบาดเจ็บ",
+"ในช่วง 1 เดือนที่ผ่านมารวมวันนี้ คิดเกี่ยวกับการฆ่าตัวตาย",
+"มีแผนการที่จะฆ่าตัวตาย",
+"ได้เตรียมการที่จะทำร้ายตนเองหรือเตรียมการจะฆ่าตัวตายโดยตั้งใจว่าจะให้ตายจริง ๆ",
+"ได้ทำให้ตนเองบาดเจ็บแต่ไม่ตั้งใจที่จะทำให้เสียชีวิต",
+"ได้พยายามฆ่าตัวตายโดยคาดหวัง/ตั้งใจที่จะให้ตาย",
+"ตลอดชีวิตที่ผ่านมา ท่านเคยพยายามฆ่าตัวตาย"
+];
+const q8Scores=[1,2,6,8,9,4,10,4];
+const st5Text=["มีปัญหาการนอน นอนไม่หลับหรือหลับมาก","มีสมาธิน้อยลง","หงุดหงิด/กระวนกระวาย/วุ่นวายใจ","รู้สึกเบื่อ","ไม่อยากพบปะผู้คน"];
+const st5Opts=["ไม่มีอาการ","เป็นบางครั้ง","บ่อยครั้ง","เป็นประจำ"];
+const burnText=[
+"ฉันรู้สึกห่อเหี่ยวจิตใจกับงานที่ทำอยู่","ฉันจะรู้สึกหมดหวังเมื่อถึงเวลาเลิกงาน","ฉันรู้สึกอ่อนเพลียตอนตื่นนอนและตอนเข้าทำงาน",
+"ฉันสามารถเข้าใจความรู้สึกนึกคิดของผู้อื่นได้โดยง่าย","ฉันปฏิบัติต่อผู้รับบริการราวกับเขาไม่มีชีวิตจิตใจ",
+"การทำงานบริการผู้อื่นตลอดทั้งวันทำให้ฉันรู้สึกเครียด","ฉันรู้สึกว่าตนเองสามารถแก้ไขปัญหาต่าง ๆ ให้ผู้อื่นได้อย่างมีประสิทธิภาพ",
+"ฉันรู้สึกเหนื่อยหน่ายกับงานที่ทำอยู่","ฉันรู้สึกว่าได้ทำให้เกิดการเปลี่ยนแปลงที่ดีขึ้นในชีวิตของผู้รับบริการ จากการทำงานของฉัน",
+"ฉันกลายเป็นคนแข็งกระด้าง ตั้งแต่เริ่มทำงานนี้","ฉันกังวลใจว่างานที่ทำอยู่ ทำให้ฉันเป็นคนเจ้าอารมณ์",
+"ฉันรู้สึกเต็มเปี่ยมไปด้วยพละกำลัง","ฉันรู้สึกคับข้องใจจากการทำงาน","ฉันรู้สึกว่ากำลังทำงานในหน้าที่ที่หนักเกินไป",
+"ฉันรู้สึกไม่อยากใส่ใจต่อพฤติกรรมของผู้รับบริการบางคน","การทำงานเกี่ยวข้องกับคนอื่นโดยตรงทำให้ฉันรู้สึกเครียดมากเกินไป",
+"ฉันสามารถสร้างบรรยากาศที่เป็นกันเองกับผู้รับบริการได้ไม่ยาก","ฉันรู้สึกเป็นสุขภายหลังจากให้บริการกับผู้รับบริการอย่างใกล้ชิด",
+"ฉันรู้สึกว่าได้สร้างสิ่งที่มีคุณค่ามากให้กับงานที่ฉันทำอยู่","ฉันรู้สึกหมดความอดทนกับงานที่ทำอยู่",
+"ในการทำงาน ฉันสามารถเผชิญปัญหาทางอารมณ์ได้อย่างสงบนิ่ง","ฉันรู้สึกว่าที่ผู้ร่วมงานและผู้รับบริการตำหนิฉันในส่วนที่เป็นปัญหาของเขา"
+];
+const burnNeg=new Set([1,2,3,6,8,13,14,16,20,5,10,11,15,22]); // source: 14 negative items
+const burnPos=new Set([4,7,9,12,17,18,19,21]);
+const burnOpts=["ไม่เคยมีความรู้สึกเช่นนั้นเลย","ปีละ 2-3 ครั้ง","เดือนละ 1 ครั้ง","เดือนละ 2-3 ครั้ง","สัปดาห์ละ 1 ครั้ง","สัปดาห์ละ 2-3 ครั้ง","ทุก ๆ วัน"];
+
+function makeRadios(container,name,opts,values){
+let h='<div class="options">';
+opts.forEach((o,i)=>h+=`<label class="option"><input type="radio" name="${name}" value="${values?values[i]:i}"> ${o}</label>`);
+h+='</div>';container.insertAdjacentHTML('beforeend',h);
+}
+function render(){
+const q9=document.getElementById("q9");
+q9Text.forEach((t,i)=>{q9.insertAdjacentHTML("beforeend",`<div class="question">${i+1}. ${t}</div>`);makeRadios(q9,`q9_${i}`,q9Opts,[0,1,2,3])});
+const q8=document.getElementById("q8");
+q8Text.forEach((t,i)=>{
+  q8.insertAdjacentHTML("beforeend",`<div class="question">${i+1}. ${t}</div>`);
+  if(i===2){
+    makeRadios(q8,`q8_${i}`,["ไม่มี","มี"],[0,6]);
+    q8.insertAdjacentHTML("beforeend",`<div class="question" id="q8follow" style="display:none">ถ้าตอบว่าคิดเกี่ยวกับฆ่าตัวตาย: ท่านสามารถควบคุมความอยากฆ่าตัวตายที่ท่านคิดอยู่นั้นได้หรือไม่ หรือบอกได้ไหมว่าคงจะไม่ทำตามความคิดนั้นในขณะนี้</div>`);
+    makeRadios(q8,`q8_follow`,["ได้","ไม่ได้"],[0,8]);
+    document.querySelectorAll('input[name="q8_2"]').forEach(x=>x.addEventListener("change",()=>{
+      document.getElementById("q8follow").style.display=x.value==="6"?"block":"none";
+    }));
+  }else{
+    makeRadios(q8,`q8_${i}`,["ไม่มี","มี"],[0,q8Scores[i]]);
+  }
+});
+const st=document.getElementById("st5");
+st5Text.forEach((t,i)=>{st.insertAdjacentHTML("beforeend",`<div class="question">${i+1}. ${t}</div>`);makeRadios(st,`st5_${i}`,st5Opts,[0,1,2,3])});
+const b=document.getElementById("burnout");
+burnText.forEach((t,i)=>{b.insertAdjacentHTML("beforeend",`<div class="question">${i+1}. ${t}</div>`);makeRadios(b,`b_${i}`,burnOpts)});
+}
+render();
+
+function start(){document.getElementById("intro").style.display="none";document.getElementById("app").style.display="block";window.scrollTo(0,0)}
+function req(prefix,n){for(let i=0;i<n;i++)if(!document.querySelector(`input[name="${prefix}${i}"]:checked`))return false;return true}
+function show(id,cls,msg){const e=document.getElementById(id);e.className="alert "+cls;e.textContent=msg;e.style.display="block"}
+function clearAlert(id){document.getElementById(id).style.display="none"}
+
+function next(n){
+if(n===1){
+if(!document.querySelector('input[name="q2_1"]:checked')||!document.querySelector('input[name="q2_2"]:checked')){show("a2q","warn","กรุณาตอบ 2Q ให้ครบทั้ง 2 ข้อ");return}
+clearAlert("a2q");show("a2q","ok","บันทึก 2Q แล้ว ระบบจะพาไป 9Q ตาม Pattern ที่กำหนด");go(2)
+}
+if(n===2){
+if(!req("q9_",9)){show("a9q","warn","กรุณาตอบ 9Q ให้ครบทั้ง 9 ข้อ");return}
+let s=0;for(let i=0;i<9;i++)s+=+document.querySelector(`input[name="q9_${i}"]:checked`).value;
+let msg=s<7?"คะแนนรวม "+s+" คะแนน: ไม่มีอาการของโรคซึมเศร้าหรือมีอาการระดับน้อยมาก":"คะแนนรวม "+s+" คะแนน: ตามเอกสารให้ประเมินแนวโน้มการฆ่าตัวตายด้วย 8Q";
+show("a9q",s>=7?"warn":"ok",msg);go(3)
+}
+if(n===3){
+if(!req("q8_",8)){show("a8q","warn","กรุณาตอบ 8Q ให้ครบทั้ง 8 ข้อ");return}
+const q3=document.querySelector('input[name="q8_2"]:checked');
+if(q3 && q3.value==="6" && !document.querySelector('input[name="q8_follow"]:checked')){show("a8q","warn","กรุณาตอบคำถามต่อเนื่องของข้อ 3 ให้ครบ");return}
+let s=0;for(let i=0;i<8;i++)s+=+document.querySelector(`input[name="q8_${i}"]:checked`).value;
+if(q3 && q3.value==="6")s+=+document.querySelector('input[name="q8_follow"]:checked').value;
+let level=s===0?"ไม่มีแนวโน้มฆ่าตัวตายในปัจจุบัน":s<=8?"มีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน ระดับน้อย":s<=16?"มีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน ระดับปานกลาง":"มีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน ระดับรุนแรง";
+show("a8q",s>=17?"danger":s>0?"warn":"ok","คะแนน 8Q "+s+" คะแนน: "+level+(s>=17?" — ตามเอกสารให้ส่งต่อโรงพยาบาลที่มีจิตแพทย์ด่วน":""));go(4)
+}
+if(n===4){
+if(!req("st5_",5)){show("ast5","warn","กรุณาตอบ ST-5 ให้ครบทั้ง 5 ข้อ");return}
+let s=0;for(let i=0;i<5;i++)s+=+document.querySelector(`input[name="st5_${i}"]:checked`).value;
+let level=s<=4?"ระดับความเครียดปกติ":s<=7?"มีความเครียดระดับปานกลาง":"มีความเครียดระดับสูง";
+show("ast5",s>=8?"warn":s>=5?"warn":"ok","คะแนน ST-5 "+s+" คะแนน: "+level);go(5)
+}
+}
+function go(n){
+document.querySelectorAll(".step").forEach(x=>x.style.display="none");
+document.getElementById("s"+n).style.display="block";
+document.getElementById("p"+n).classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+function finish(){
+if(!req("b_",22)){show("aburn","warn","กรุณาตอบแบบประเมิน Burnout ให้ครบทั้ง 22 ข้อ");return}
+let ee=0,dp=0,pa=0;
+for(let i=0;i<22;i++){
+const raw=+document.querySelector(`input[name="b_${i}"]:checked`).value;
+const num=i+1;
+const score=burnNeg.has(num)?raw:(6-raw);
+if([1,2,3,6,8,13,14,16,20].includes(num))ee+=score;
+if([5,10,11,15,22].includes(num))dp+=score;
+if([4,7,9,12,17,18,19,21].includes(num))pa+=score;
+}
+document.querySelectorAll(".step").forEach(x=>x.style.display="none");
+document.getElementById("app").style.display="block";
+document.getElementById("final").style.display="block";
+document.getElementById("aburn").style.display="none";
+document.getElementById("results").innerHTML=`
+<div class="result-card"><div>ความอ่อนล้าทางอารมณ์</div><div class="score">${ee} คะแนน</div><div class="small">${ee<=16?"ระดับต่ำ":ee<=26?"ระดับปานกลาง":"ระดับสูง"}</div></div>
+<div class="result-card"><div>การลดความเป็นบุคคล</div><div class="score">${dp} คะแนน</div><div class="small">${dp<=6?"ระดับต่ำ":dp<=12?"ระดับปานกลาง":"ระดับสูง"}</div></div>
+<div class="result-card"><div>ความสำเร็จส่วนบุคคล</div><div class="score">${pa} คะแนน</div><div class="small">${pa>=39?"ระดับสูง":pa>=32?"ระดับปานกลาง":"ระดับต่ำ"}</div></div>`;
+const q8=[];for(let i=0;i<8;i++)q8.push(+document.querySelector(`input[name="q8_${i}"]:checked`).value);
+const q8sum=q8.reduce((a,b)=>a+b,0)+(document.querySelector('input[name="q8_follow"]:checked')?+document.querySelector('input[name="q8_follow"]:checked').value:0);
+if(q8sum>=17){const u=document.getElementById("urgent");u.textContent="⚠️ คะแนน 8Q ≥ 17: ตามเอกสารที่ใช้ในระบบ ให้ส่งต่อโรงพยาบาลที่มีจิตแพทย์ด่วน";u.style.display="block";}
+window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
 </body>
 </html>
